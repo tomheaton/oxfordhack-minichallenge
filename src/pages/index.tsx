@@ -1,12 +1,12 @@
 import type {NextPage} from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Index.module.css'
 import Card from "./components/card";
 import { Org } from "./types/types";
 
-const data = require("../input.json");
+const data = require("../data/input.json");
 
-const Home: NextPage = () => {
+const Index: NextPage = () => {
     return (
         <div className={styles.container}>
             <Head>
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
                 </div>
             </main>
         </div>
-    )
+    );
 }
 
-export default Home
+export default Index;
