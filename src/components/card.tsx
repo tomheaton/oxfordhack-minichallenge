@@ -1,6 +1,6 @@
 import React from "react";
-import { Org } from "../types/types";
-import styles from "../../styles/Card.module.css";
+import { Org } from "../pages/types/types";
+import styles from "../styles/Card.module.css";
 
 const Card: React.FC<{org: Org}> = ({ org }) => {
 

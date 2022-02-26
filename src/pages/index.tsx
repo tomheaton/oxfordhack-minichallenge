@@ -1,7 +1,7 @@
 import type {NextPage} from 'next'
 import Head from 'next/head'
 import styles from '../styles/Index.module.css'
-import Card from "./components/card";
+import Card from "../components/card";
 import { Org } from "./types/types";
 
 const data = require("../data/input.json");
