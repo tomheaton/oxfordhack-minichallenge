@@ -2,20 +2,30 @@ import {NextPage} from 'next';
 import Head from 'next/head';
 import styles from '@styles/Index.module.css';
 import {SyntheticEvent, useState} from "react";
-import {useRouter} from "next/router";
-import {downloadFile, generateRatedMerchant} from "../util/utils";
+import {downloadFile, generateRatedMerchant} from "@lib/utils";
 //@ts-ignore
 import {Merchant} from "@types/types";
 
-const data = require("@data/input.json");
+const data = require("@data/input-alt.json");
 
 const Index: NextPage = () => {
 
-    const router = useRouter();
+    // const inputContext = useContext(InputContext);
 
     const [rawData, setRawData] = useState<any>();
 
-    const [ready, setReady] = useState<boolean>(true);
+    const [ready, setReady] = useState<boolean>(false)
+
+    const handleUpload = (e: SyntheticEvent) => {
+        const fileReader = new FileReader();
+
+        fileReader.readAsText(e.target.files[0], "UTF-8");
+
+        fileReader.onload = (e: ProgressEvent<FileReader>) => {
+            setRawData(JSON.parse(e.target.result));
+            //inputContext.setInputData(JSON.parse(e.target.result));
+        }
+    }
 
     // TODO: this.
     const handleGeneration = async (e: SyntheticEvent) => {
@@ -54,7 +64,11 @@ const Index: NextPage = () => {
                 </h1>
 
                 {/*TODO: add import data?*/}
-                {/*<input type={"file"} />*/}
+                <input type={"file"} name={"file"} onChange={handleUpload} />
+
+                <p>
+                    raw data: {JSON.stringify(rawData)}
+                </p>
 
                 <br/>
 

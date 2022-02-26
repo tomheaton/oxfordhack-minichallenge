@@ -1,12 +1,19 @@
 import {NextPage} from "next";
 import {useRouter} from "next/router";
-//@ts-ignore // TODO: fix this ;(
+// @ts-ignore // TODO: fix this ;(
 import {Merchant} from "@types/types";
 import Card from "@components/card";
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
+// @ts-ignore
+import { ProgressCircle } from 'react-simple-circle-rating';
+import {useContext} from "react";
+import {InputContext} from "@lib/input_context";
 
-const data = require("@data/input.json");
+// const data = require("@data/input.json");
 
 const MerchantId: NextPage = () => {
+
+    const inputContext = useContext(InputContext);
 
     const router = useRouter();
 
@@ -20,7 +27,12 @@ const MerchantId: NextPage = () => {
         );
     }
 
-    const merchant: Merchant = data[id - 1]
+    // @ts-ignore
+    const merchant: Merchant = inputContext.inputData[id - 1]
+
+    const render = (status: Status) => {
+        return <h1>{status}</h1>;
+    };
 
     return (
 
@@ -29,6 +41,18 @@ const MerchantId: NextPage = () => {
             <br/>
             <Card key={id} merchant={merchant} />
             <div>
+                {/*<Wrapper apiKey={`${process.env.}`} render={render}>
+                    <YourComponent/>
+                </Wrapper>*/}
+                <ProgressCircle percentage={80} />
+
+                <ProgressCircle
+                    percentage={50}
+                    color={["#00bd00", "#ffb01f", "#ff3d3d"]}
+                    colorBackground="#4d4d4d"
+                    textColor="#3d3d3d"
+                    size={40}
+                />
 
             </div>
         </div>
