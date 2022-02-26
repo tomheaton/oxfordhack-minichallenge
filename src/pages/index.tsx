@@ -1,8 +1,31 @@
 import {NextPage} from 'next';
 import Head from 'next/head';
 import styles from '@styles/Index.module.css';
+import {SyntheticEvent, useState} from "react";
+import {useRouter} from "next/router";
+import {downloadFile} from "../util/utils";
 
 const Index: NextPage = () => {
+
+    const router = useRouter();
+
+    const [ready, setReady] = useState<boolean>(true);
+
+    // TODO: this.
+    const handleGeneration = (e: SyntheticEvent) => {
+        e.preventDefault();
+
+        console.log("Generating Ratings");
+    }
+
+    const handleDownload = async (e: SyntheticEvent) => {
+        e.preventDefault();
+
+        console.log("Downloading Output");
+
+        await downloadFile({lol: "lol"});
+    }
+
     return (
         <div className={styles.container}>
             <Head>
@@ -15,6 +38,24 @@ const Index: NextPage = () => {
                 <h1 className={styles.title}>
                     SaltPay Challenge
                 </h1>
+
+                {/*TODO: add import data?*/}
+                {/*<input type={"file"} />*/}
+
+                <br/>
+
+                <button className={"btn"} onClick={handleGeneration}>
+                    Generate Ratings
+                </button>
+
+                { ready &&
+                    (
+                        <button className={"btn"} onClick={handleDownload}>
+                            Download Output
+                        </button>
+                    )
+                }
+
             </main>
         </div>
     );

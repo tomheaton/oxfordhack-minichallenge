@@ -8,6 +8,7 @@ type Merchant = {
     "Shared Comments": string
     "Shared Tickets": string
     ssn: string
+    rating?: number
 }
 
 export type { Merchant };

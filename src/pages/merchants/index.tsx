@@ -19,7 +19,7 @@ const Merchants: NextPage = () => {
                 {
                     data.map((element: Merchant, index: number) => {
                         return (
-                            <Card key={index} org={element} />
+                            <Card key={index} merchant={element} />
                         );
                     })
                 }
