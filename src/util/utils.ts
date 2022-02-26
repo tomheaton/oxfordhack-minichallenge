@@ -1,13 +1,22 @@
 //@ts-ignore // TODO: fix this ;(
 import {Merchant} from "@types/types";
 
-const geoEncodeAddress = async (address: string) => {
+const generateRatedMerchant = (merchant: Merchant, nearbyData: any): Merchant => {
 
+    let updateMerchant = merchant
+
+    // Add rating to merchant object
+    updateMerchant.rating = generateRating(merchant, nearbyData);
+
+    return updateMerchant;
 }
 
+const generateRating = (merchant: Merchant, nearbyData: any): number => {
 
-const generateRating = (merchant: Merchant): void => {
+    // TODO: actually calculate rating.
+    let rating = 6.9;
 
+    return rating;
 }
 
 const downloadFile = (data: any): void => {
@@ -25,4 +34,4 @@ const downloadFile = (data: any): void => {
     document.body.removeChild(link);
 }
 
-export { generateRating, downloadFile };
+export { generateRatedMerchant, generateRating, downloadFile };

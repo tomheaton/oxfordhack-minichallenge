@@ -1,5 +1,7 @@
 import {NextPage} from "next";
 import {SyntheticEvent, useState} from "react";
+//@ts-ignore
+import {Merchant} from "@types/types";
 
 const Nearby: NextPage = () => {
 
@@ -21,26 +23,23 @@ const Nearby: NextPage = () => {
         setErrorMessage(null);
 
         try {
-            /*const response = await fetch("/api/nearby", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({address})
-            });*/
-
-            console.log(encodeURIComponent(address));
             let url = `/api/nearby?address=${encodeURIComponent(address)}`;
-
             const response = await fetch(url);
-
             const data = await response.json()
             console.log(data)
 
             if (data.success) {
                 setSuccessMessage(data.message);
                 setIsSubmitting(false);
-                setResult(data);
+                setResult(data.result);
+
+                /*data.forEach((merchant: Merchant, index: number) => {
+                    console.log(merchant.name);
+                    // const nearbyData = await fetch("/api/nearby")
+
+                    // console.log(`rating: ${rating}`);
+                });*/
+
                 return;
             }
 

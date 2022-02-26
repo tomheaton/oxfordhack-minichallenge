@@ -3,19 +3,32 @@ import Head from 'next/head';
 import styles from '@styles/Index.module.css';
 import {SyntheticEvent, useState} from "react";
 import {useRouter} from "next/router";
-import {downloadFile} from "../util/utils";
+import {downloadFile, generateRatedMerchant} from "../util/utils";
+//@ts-ignore
+import {Merchant} from "@types/types";
+
+const data = require("@data/input.json");
 
 const Index: NextPage = () => {
 
     const router = useRouter();
 
+    const [rawData, setRawData] = useState<any>();
+
     const [ready, setReady] = useState<boolean>(true);
 
     // TODO: this.
-    const handleGeneration = (e: SyntheticEvent) => {
+    const handleGeneration = async (e: SyntheticEvent) => {
         e.preventDefault();
 
         console.log("Generating Ratings");
+
+        await data.map(async (merchant: Merchant, index: number, merchantList: Merchant[]) => {
+
+            const nearbyData = await fetch(`/api/nearby?address=${encodeURIComponent(merchant.address)}`;
+
+            merchantList[index] = generateRatedMerchant(merchant, nearbyData);
+        });
     }
 
     const handleDownload = async (e: SyntheticEvent) => {
@@ -23,7 +36,7 @@ const Index: NextPage = () => {
 
         console.log("Downloading Output");
 
-        await downloadFile({lol: "lol"});
+        await downloadFile(data);
     }
 
     return (
