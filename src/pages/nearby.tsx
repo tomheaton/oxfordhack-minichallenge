@@ -29,9 +29,8 @@ const Nearby: NextPage = () => {
                 body: JSON.stringify({address})
             });*/
 
-            let encodedAddress = `${encodeURIComponent(address)}`;
-            let url = `https://maps.googleapis.com/maps/api/geocode/json?` +
-                `address=${encodedAddress}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
+            console.log(encodeURIComponent(address));
+            let url = `/api/nearby?address=${encodeURIComponent(address)}`;
 
             const response = await fetch(url);
 
@@ -96,7 +95,7 @@ const Nearby: NextPage = () => {
             </button>
 
             <p>
-                result: {result}
+                result: {JSON.stringify(result)}
             </p>
         </div>
     );

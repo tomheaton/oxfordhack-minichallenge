@@ -8,24 +8,25 @@ type Data = {
 
 const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
-    const { location, radius, type, keyword } = req.query;
+    const { address } = req.query as { address: string };
 
-    let a = "-33.8670522%2C151.1957362";
-    let r = 1500;
-    let t = "restaurant";
-    let k = "cruise";
+    // Get location data
+    let url = 'https://maps.googleapis.com/maps/api/geocode/json' +
+        `?address=${encodeURIComponent(address)}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
+    let result = await fetch(url);
+    let data = await result.json()
 
-    const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json' +
-            `?location=${location}&radius=${radius}&type=${type}&keyword=${keyword}` +
-            `&key=${process.env.GOOGLE_MAPS_API_KEY}`;
+    // Get nearby data
+    const { lat, lng } = data.results[0].geometry.location;
+    url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json' +
+        `?location=${encodeURIComponent(`${lat},${lng}`)}&radius=1500&key=${process.env.GOOGLE_MAPS_API_KEY}`;
+    result = await fetch(url);
+    data = await result.json()
 
-    const result = await fetch(url);
-
-    console.log(result)
-
+    // TODO: rework error checking
     if (result) {
         console.log(JSON.stringify(result));
-        return res.status(200).json({ success: true, message: 'Data found', data: result });
+        return res.status(200).json({ success: true, message: 'Data found', data: data.results });
     }
 
     return res.status(404).json({ success: false, message: 'No data found' });
