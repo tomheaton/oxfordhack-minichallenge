@@ -1,4 +1,4 @@
-type Org = {
+type Merchant = {
     name: string
     address: string
     organization_type: string
@@ -10,4 +10,4 @@ type Org = {
     ssn: string
 }
 
-export type { Org };
+export type { Merchant };

@@ -2,7 +2,7 @@ import type {NextPage} from 'next'
 import Head from 'next/head'
 import styles from '../styles/Index.module.css'
 import Card from "../components/card";
-import { Org } from "../types/types";
+import { Merchant } from "../types/types";
 
 const data = require("../data/input.json");
 
@@ -22,9 +22,10 @@ const Index: NextPage = () => {
 
                 {/*<p>{JSON.stringify(data, null, 4)}</p>*/}
 
-                <div>
+                <div className={styles.cardContainer}>
+                    <h2>Merchants</h2>
                     {
-                        data.map((element: Org, index: number) => {
+                        data.map((element: Merchant, index: number) => {
                             return (
                                 <Card key={index} org={element} />
                             );

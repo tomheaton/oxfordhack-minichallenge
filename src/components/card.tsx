@@ -1,8 +1,8 @@
 import React from "react";
-import { Org } from "../types/types";
+import { Merchant } from "../types/types";
 import styles from "../styles/Card.module.css";
 
-const Card: React.FC<{org: Org}> = ({ org }) => {
+const Card: React.FC<{org: Merchant}> = ({ org }) => {
 
     return (
         <div className={styles.card}>

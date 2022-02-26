@@ -1,6 +1,6 @@
 # Todo
 
-- [ ] View input data
+- [x] View input data
 - [ ] Create output data
 - [ ] Create analysis
 - [ ] upload/download data files
