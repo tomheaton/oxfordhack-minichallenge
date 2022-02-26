@@ -25,7 +25,7 @@ const Index: NextPage = () => {
 
         await data.map(async (merchant: Merchant, index: number, merchantList: Merchant[]) => {
 
-            const nearbyData = await fetch(`/api/nearby?address=${encodeURIComponent(merchant.address)}`;
+            const nearbyData = await fetch(`/api/nearby?address=${encodeURIComponent(merchant.address)}`);
 
             merchantList[index] = generateRatedMerchant(merchant, nearbyData);
         });
