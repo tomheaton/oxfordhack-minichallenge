@@ -1,60 +1,58 @@
-import {NextPage} from "next";
-import {useRouter} from "next/router";
-// @ts-ignore // TODO: fix this ;(
+import {GetServerSideProps, NextPage} from "next";
+// @ts-ignore // TODO: fix this
 import {Merchant} from "@types/types";
-import Card from "@components/card";
-import {Status} from "@googlemaps/react-wrapper";
 // @ts-ignore
 import {ProgressCircle} from 'react-simple-circle-rating';
+import styles from "@styles/Index.module.css";
 
-const data = require("@data/input-alt.json");
+const _data = require("@data/input-alt.json");
 
-const MerchantId: NextPage = () => {
+type Props = {
+    data?: Merchant
+}
 
-    const router = useRouter();
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
-    const id = Number(router.query?.merchant_id) || -1;
+    const data = _data[Number(params?.merchant_id) || -1]
 
-    if (id === -1) {
+    return {
+        props: {
+            data
+        }
+    };
+}
+
+const MerchantId: NextPage<Props> = (props) => {
+
+    if (props.data) {
+
+        const {name, address, rating} = props.data;
+
         return (
-            <div>
-                <p>Invalid Merchant ID!</p>
+            <div className={styles.container}>
+                <div className={styles.main}>
+                    <div className={styles.card}>
+                        <h1 className={"text-5xl"}>
+                            {name}
+                        </h1>
+                        <br />
+                        <p>Address: {address}</p>
+                        <p>Rating: {rating}</p>
+                    </div>
+                </div>
             </div>
         );
     }
 
-    // @ts-ignore
-    const merchant: Merchant = data[id - 1]
-
-    const render = (status: Status) => {
-        return <h1>{status}</h1>;
-    };
-
     return (
-
-        <div>
-            Merchant ID here {id}
-            <br/>
-            <Card key={id} merchant={merchant} />
-            <div>
-                {/*<Wrapper apiKey={`${process.env.}`} render={render}>
-                    <YourComponent/>
-                </Wrapper>*/}
-                <ProgressCircle percentage={80} />
-
-                <ProgressCircle
-                    percentage={50}
-                    color={["#00bd00", "#ffb01f", "#ff3d3d"]}
-                    colorBackground="#4d4d4d"
-                    textColor="#3d3d3d"
-                    size={40}
-                />
-
+        <div className={styles.container}>
+            <div className={styles.main}>
+                <h1 className={"text-5xl"}>
+                    No merchant found with that id!
+                </h1>
             </div>
         </div>
     );
-
-
 }
 
 export default MerchantId;

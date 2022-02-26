@@ -1,12 +1,16 @@
 import React from "react";
 // @ts-ignore // TODO: fixme
-import { Merchant } from "@types/types";
+import {Merchant} from "@types/types";
 import styles from "@styles/Card.module.css";
+import {useRouter} from "next/router";
+import merchants from "../pages/merchants";
 
-const Card: React.FC<{merchant: Merchant}> = ({ merchant }) => {
+const Card: React.FC<{merchant: Merchant, merchantId: number}> = ({ merchant, merchantId }) => {
+
+    const router = useRouter();
 
     return (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={() => {router.push(`/merchants/${merchantId}`)}}>
             <p>Name: {merchant.name}</p>
             <p>Address: {merchant.address}</p>
             {merchant.rating && (<p>Rating: {merchant.rating}</p>)}

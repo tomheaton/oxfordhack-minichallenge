@@ -5,10 +5,13 @@ import {SyntheticEvent, useState} from "react";
 import {downloadFile, generateRatedMerchant} from "@lib/utils";
 //@ts-ignore
 import {Merchant} from "@types/types";
+import {useRouter} from "next/router";
 
 const data = require("@data/input-alt.json");
 
 const Index: NextPage = () => {
+
+    const router = useRouter();
 
     const [rawData, setRawData] = useState<any>();
 
@@ -60,14 +63,21 @@ const Index: NextPage = () => {
                 <h1 className={styles.title}>
                     SaltPay Challenge
                 </h1>
+                <h2 className={styles.description}>
+                    Merchant Online Presence Rater (MOPR)
+                </h2>
 
                 {/*<input type={"file"} name={"file"} onChange={handleUpload} />
                 <p>raw data: {JSON.stringify(rawData)}</p>*/}
 
                 <br/>
 
-                <button className={"btn"} onClick={handleGeneration}>
+                {/*<button className={"btn"} onClick={handleGeneration}>
                     Generate Ratings
+                </button>*/}
+
+                <button className={"btn"} onClick={() => {router.push("/merchants")}}>
+                    view merchants
                 </button>
 
                 { ready &&
