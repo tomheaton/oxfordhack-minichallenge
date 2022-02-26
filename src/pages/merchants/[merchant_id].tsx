@@ -3,17 +3,13 @@ import {useRouter} from "next/router";
 // @ts-ignore // TODO: fix this ;(
 import {Merchant} from "@types/types";
 import Card from "@components/card";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import {Status} from "@googlemaps/react-wrapper";
 // @ts-ignore
-import { ProgressCircle } from 'react-simple-circle-rating';
-import {useContext} from "react";
-import {InputContext} from "@lib/input_context";
+import {ProgressCircle} from 'react-simple-circle-rating';
 
-// const data = require("@data/input.json");
+const data = require("@data/input-alt.json");
 
 const MerchantId: NextPage = () => {
-
-    const inputContext = useContext(InputContext);
 
     const router = useRouter();
 
@@ -28,7 +24,7 @@ const MerchantId: NextPage = () => {
     }
 
     // @ts-ignore
-    const merchant: Merchant = inputContext.inputData[id - 1]
+    const merchant: Merchant = data[id - 1]
 
     const render = (status: Status) => {
         return <h1>{status}</h1>;

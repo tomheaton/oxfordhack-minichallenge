@@ -10,13 +10,11 @@ const data = require("@data/input-alt.json");
 
 const Index: NextPage = () => {
 
-    // const inputContext = useContext(InputContext);
-
     const [rawData, setRawData] = useState<any>();
 
     const [ready, setReady] = useState<boolean>(false)
 
-    const handleUpload = (e: SyntheticEvent) => {
+    /*const handleUpload = (e: SyntheticEvent) => {
         const fileReader = new FileReader();
 
         fileReader.readAsText(e.target.files[0], "UTF-8");
@@ -25,7 +23,7 @@ const Index: NextPage = () => {
             setRawData(JSON.parse(e.target.result));
             //inputContext.setInputData(JSON.parse(e.target.result));
         }
-    }
+    }*/
 
     // TODO: this.
     const handleGeneration = async (e: SyntheticEvent) => {
@@ -63,12 +61,8 @@ const Index: NextPage = () => {
                     SaltPay Challenge
                 </h1>
 
-                {/*TODO: add import data?*/}
-                <input type={"file"} name={"file"} onChange={handleUpload} />
-
-                <p>
-                    raw data: {JSON.stringify(rawData)}
-                </p>
+                {/*<input type={"file"} name={"file"} onChange={handleUpload} />
+                <p>raw data: {JSON.stringify(rawData)}</p>*/}
 
                 <br/>
 
