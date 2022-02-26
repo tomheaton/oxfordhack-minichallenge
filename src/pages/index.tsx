@@ -21,13 +21,14 @@ const Index: NextPage = () => {
     const handleGeneration = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        console.log("Generating Ratings");
+        console.log(`Generating Ratings (count: ${data.length})`);
 
         await data.map(async (merchant: Merchant, index: number, merchantList: Merchant[]) => {
 
-            const nearbyData = await fetch(`/api/nearby?address=${encodeURIComponent(merchant.address)}`);
+            const result = await fetch(`/api/nearby?address=${encodeURIComponent(merchant.address)}`);
+            const nearbyData = await result.json()
 
-            merchantList[index] = generateRatedMerchant(merchant, nearbyData);
+            merchantList[index] = generateRatedMerchant(merchant, nearbyData.data.results);
         });
     }
 

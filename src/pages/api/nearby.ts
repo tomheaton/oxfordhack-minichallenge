@@ -22,11 +22,13 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
         `?location=${encodeURIComponent(`${lat},${lng}`)}&radius=1500&key=${process.env.GOOGLE_MAPS_API_KEY}`;
     result = await fetch(url);
     data = await result.json()
+    // console.log(data)
+
+    // return res.status(200).json({success: true, message: 'Data found', data: data});
 
     // TODO: rework error checking
     if (result) {
-        console.log(JSON.stringify(result));
-        return res.status(200).json({ success: true, message: 'Data found', data: data.results });
+        return res.status(200).json({ success: true, message: 'Data found', data: data });
     }
 
     return res.status(404).json({ success: false, message: 'No data found' });

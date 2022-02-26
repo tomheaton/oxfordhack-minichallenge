@@ -26,12 +26,13 @@ const Nearby: NextPage = () => {
             let url = `/api/nearby?address=${encodeURIComponent(address)}`;
             const response = await fetch(url);
             const data = await response.json()
-            console.log(data)
+            // console.log(data)
 
             if (data.success) {
                 setSuccessMessage(data.message);
                 setIsSubmitting(false);
                 setResult(data.result);
+                // console.log(data.result.data)
 
                 /*data.forEach((merchant: Merchant, index: number) => {
                     console.log(merchant.name);

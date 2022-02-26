@@ -13,8 +13,18 @@ const generateRatedMerchant = (merchant: Merchant, nearbyData: any): Merchant =>
 
 const generateRating = (merchant: Merchant, nearbyData: any): number => {
 
+    console.log(`generating rating for: ${merchant.name} @ ${merchant.address}`);
+
     // TODO: actually calculate rating.
     let rating = 6.9;
+
+    nearbyData = nearbyData.filter((element: any, index: number) => {
+        // Check if business is not same as element and is actually operational.
+        return ("business_status" in element && element.business_status === "OPERATIONAL");
+    }).map((element: any, index: number) => {
+        return ({ rating: Number(element.rating) || -1, types: element.types });
+    })
+    console.log(nearbyData)
 
     return rating;
 }

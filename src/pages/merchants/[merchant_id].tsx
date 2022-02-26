@@ -28,6 +28,9 @@ const MerchantId: NextPage = () => {
             Merchant ID here {id}
             <br/>
             <Card key={id} merchant={merchant} />
+            <div>
+
+            </div>
         </div>
     );
 
