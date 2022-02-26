@@ -3,11 +3,6 @@ import {Merchant} from "@types/types";
 
 const geoEncodeAddress = async (address: string) => {
 
-    const result = await fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + address);
-
-    if (result && result.data) {
-        return result.data.geometry.location
-    }
 }
 
 

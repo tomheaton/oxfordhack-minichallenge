@@ -1,6 +1,6 @@
 import React from "react";
 //@ts-ignore // TODO: fixme
-import { Merchant } from "../types/types";
+import { Merchant } from "@types/types";
 import styles from "../styles/Card.module.css";
 
 const Card: React.FC<{merchant: Merchant}> = ({ merchant }) => {

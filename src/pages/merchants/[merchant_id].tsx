@@ -2,7 +2,6 @@ import {NextPage} from "next";
 import {useRouter} from "next/router";
 //@ts-ignore // TODO: fix this ;(
 import {Merchant} from "@types/types";
-import merchants from "./index";
 import Card from "@components/card";
 
 const data = require("@data/input.json");
