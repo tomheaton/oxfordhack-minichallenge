@@ -21,6 +21,8 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
 
     const result = await fetch(url);
 
+    console.log(result)
+
     if (result) {
         console.log(JSON.stringify(result));
         return res.status(200).json({ success: true, message: 'Data found', data: result });
