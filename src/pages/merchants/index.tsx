@@ -4,7 +4,7 @@ import Card from "@components/card";
 //@ts-ignore // TODO: fix this ;(
 import {Merchant} from "@types/types";
 
-const data = require("../data/input.json");
+const data = require("@data/input.json");
 
 const Merchants: NextPage = () => {
     return (
