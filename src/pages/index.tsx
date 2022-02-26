@@ -1,10 +1,6 @@
-import type {NextPage} from 'next'
-import Head from 'next/head'
-import styles from '../styles/Index.module.css'
-import Card from "../components/card";
-import { Merchant } from "../types/types";
-
-const data = require("../data/input.json");
+import {NextPage} from 'next';
+import Head from 'next/head';
+import styles from '@styles/Index.module.css';
 
 const Index: NextPage = () => {
     return (
@@ -19,19 +15,6 @@ const Index: NextPage = () => {
                 <h1 className={styles.title}>
                     SaltPay Challenge
                 </h1>
-
-                {/*<p>{JSON.stringify(data, null, 4)}</p>*/}
-
-                <div className={styles.cardContainer}>
-                    <h2>Merchants</h2>
-                    {
-                        data.map((element: Merchant, index: number) => {
-                            return (
-                                <Card key={index} org={element} />
-                            );
-                        })
-                    }
-                </div>
             </main>
         </div>
     );
