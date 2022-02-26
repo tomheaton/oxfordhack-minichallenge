@@ -3,10 +3,14 @@ import styles from "@styles/Index.module.css";
 import Card from "@components/card";
 //@ts-ignore // TODO: fix this ;(
 import {Merchant} from "@types/types";
+import {useState} from "react";
 
-const data = require("@data/input.json");
+const data = require("@data/input-alt.json");
 
 const Merchants: NextPage = () => {
+
+    const [search, setSearch] = useState<string>("");
+
     return (
         <div>
             <h1>
