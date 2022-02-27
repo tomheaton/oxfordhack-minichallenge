@@ -87,13 +87,13 @@ const MerchantId: NextPage<Props> = (props) => {
                         </h1>
                         <br />
                         <p>Address: {address}</p>
-                        <p>Rating: {rating}</p>
+                        {rating && (<p>Rating: {rating.toFixed(1)}</p>)}
                     </div>
 
                     {
-                        showRating ? (
+                        showRating && rating ? (
                             <ProgressCircle
-                                percentage={rating}
+                                percentage={rating.toFixed(1)}
                                 color={"white"}
                                 colorBackground={"#7561e3"}
                                 textColor={"black"}

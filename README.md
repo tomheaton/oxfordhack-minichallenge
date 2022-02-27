@@ -6,8 +6,7 @@ Fork this repository and fill out your details below:
 
 ## Your details
 
-[//]: # (TODO: this)
 - Name: Juicer Labs (Tom Heaton, Gonzal Pestana)
-- Email: `team@juicer-labs.tech`, `tom@tomheaton.dev` `
-- LinkedIn: `https://tomheaton.dev/linkedin`
+- Email: [Tom](mailto:thomas.m.heaton@gmail.com), [Gonzal](mailto:bottlecollector52@gmail.com)
+- LinkedIn: [Tom](https://tomheaton.dev/linkedin "Tom LinkedIn")
 

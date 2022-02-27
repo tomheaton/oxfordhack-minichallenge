@@ -14,7 +14,7 @@ const Card: React.FC<{merchant: Merchant, merchantId: number}> = ({ merchant, me
                 {merchant.name}
             </h2>
             <p>Address: {merchant.address}</p>
-            {merchant.rating && (<p>Rating: {merchant.rating}</p>)}
+            {merchant.rating && (<p>Rating: {merchant.rating.toFixed(1)}</p>)}
         </div>
     );
 }
