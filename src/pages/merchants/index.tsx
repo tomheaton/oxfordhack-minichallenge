@@ -42,7 +42,7 @@ const Merchants: NextPage = () => {
 
                 merchantList[index] = generateRatedMerchant(merchant, nearbyData.data.results);
             });
-            
+
             setIsSubmitting(false);
             setRating(true);
         } catch (e) {
@@ -88,7 +88,7 @@ const Merchants: NextPage = () => {
                         {data.filter((result: Merchant) => result.name.toLowerCase()
                             .includes(search.toLowerCase())).map((merchant: Merchant, index: number) => {
                             return (
-                                <Card key={index} merchant={merchant} merchantId={index+1} />
+                                <Card key={index} merchant={merchant} merchantId={index} />
                             );
                         })}
                     </div>

@@ -34,7 +34,7 @@ const MerchantId: NextPage<Props> = (props) => {
 
     const router = useRouter();
 
-    let { merchant } = props;
+    let merchant = props.merchant;
 
     const [showRating, setShowRating] = useState<boolean>(false);
 
