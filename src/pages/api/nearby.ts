@@ -1,4 +1,4 @@
-import {NextApiHandler, NextApiRequest, NextApiResponse} from 'next'
+import {NextApiHandler, NextApiRequest, NextApiResponse} from 'next';
 
 type Data = {
     message: string
@@ -23,8 +23,7 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
     result = await fetch(url);
     data = await result.json()
 
-    // TODO: rework error checking
-    if (result) {
+    if (result && data) {
         return res.status(200).json({ success: true, message: 'Data found', data: data });
     }
 

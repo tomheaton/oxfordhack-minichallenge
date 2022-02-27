@@ -1,4 +1,4 @@
-import {NextApiHandler, NextApiRequest, NextApiResponse} from 'next'
+import {NextApiHandler, NextApiRequest, NextApiResponse} from 'next';
 
 type Data = {
     name: string

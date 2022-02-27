@@ -14,7 +14,6 @@ const Index: NextPage = () => {
     const router = useRouter();
 
     const [rawData, setRawData] = useState<any>();
-
     const [ready, setReady] = useState<boolean>(false)
 
     /*const handleUpload = (e: SyntheticEvent) => {
@@ -28,7 +27,6 @@ const Index: NextPage = () => {
         }
     }*/
 
-    // TODO: this.
     const handleGeneration = async (e: SyntheticEvent) => {
         e.preventDefault();
 

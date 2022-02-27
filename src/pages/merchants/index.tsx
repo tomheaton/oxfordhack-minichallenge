@@ -42,14 +42,7 @@ const Merchants: NextPage = () => {
 
                 merchantList[index] = generateRatedMerchant(merchant, nearbyData.data.results);
             });
-
-            /*if (nearbyData.success) {
-                setSuccessMessage(nearbyData.message);
-                setIsSubmitting(false);
-                return;
-            }*/
-
-            // setErrorMessage(nearbyData.message);
+            
             setIsSubmitting(false);
             setRating(true);
         } catch (e) {
