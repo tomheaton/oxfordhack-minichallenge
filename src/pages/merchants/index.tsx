@@ -6,6 +6,7 @@ import {SyntheticEvent, useState} from "react";
 import styles from "@styles/Index.module.css";
 import {downloadFile, generateRatedMerchant} from "@lib/tools";
 import {useRouter} from "next/router";
+import {Head} from "next/document";
 
 const data = require("@data/input-alt.json");
 
@@ -60,11 +61,6 @@ const Merchants: NextPage = () => {
 
     return (
         <div className={"flex flex-col w-full items-center justify-content"}>
-            {/*<Head>
-                <title>Merchant | SaltPay Challenge</title>
-                <meta name={"description"} content={"Oxford Hack 2022"} />
-                <link rel={"icon"} href={"/favicon.ico"} />
-            </Head>*/}
             <div className={"w-2/3"}>
                 <h1 className={"mx-2 text-5xl font-bold pt-10 flex justify-between items-center"}>
                     Merchant
