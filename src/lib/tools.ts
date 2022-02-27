@@ -28,12 +28,14 @@ const generateRating = (merchant: Merchant, nearbyData: any): number => {
 
     // https://developers.google.com/maps/documentation/places/web-service/supported_types
     nearbyData.forEach((element: any, index: number) => {
-        if (element.types.includes("")) {
+        // TODO: compare lists method
+        if (element.types.includes("bakery") || element.types.includes("bakery") || element.types.includes("convenience_store")) {
+            rating += 3;
+        }
+        if (element.types.includes("florist")) {
             rating += 2;
         }
-        if (element.types.includes("")) {
-            rating += 2;
-        }
+        // Being near competition decreases rating
         if (element.types.includes("shopping_mall") || element.types.includes("supermarket")) {
             rating -= 0.5;
         }
@@ -52,7 +54,7 @@ const generateRating = (merchant: Merchant, nearbyData: any): number => {
 const downloadFile = (data: any): void => {
 
     const filename = "output";
-    const json = JSON.stringify(data);
+    const json = JSON.stringify(data, null, 4);
     const blob = new Blob([json], { type: "application/json" });
     const href = URL.createObjectURL(blob);
     const link = document.createElement('a');

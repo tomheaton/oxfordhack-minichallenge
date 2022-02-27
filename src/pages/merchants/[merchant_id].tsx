@@ -96,7 +96,7 @@ const MerchantId: NextPage<Props> = (props) => {
                                 percentage={rating}
                                 color={"white"}
                                 colorBackground={"#7561e3"}
-                                textColor={"white"}
+                                textColor={"black"}
                                 size={30}
                             />
                         ) : (

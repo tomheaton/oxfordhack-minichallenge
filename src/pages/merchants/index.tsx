@@ -6,7 +6,6 @@ import {SyntheticEvent, useState} from "react";
 import styles from "@styles/Index.module.css";
 import {downloadFile, generateRatedMerchant} from "@lib/tools";
 import {useRouter} from "next/router";
-import {Head} from "next/document";
 
 const data = require("@data/input-alt.json");
 
