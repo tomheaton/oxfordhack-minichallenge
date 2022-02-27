@@ -15,8 +15,8 @@ const generateRating = (merchant: Merchant, nearbyData: any): number => {
 
     console.log(`generating rating for: ${merchant.name} @ ${merchant.address}`);
 
-    // TODO: actually calculate rating.
-    let rating = 6.9;
+    // Start at an average of 2.5.
+    let rating = 5;
 
     nearbyData = nearbyData.filter((element: any, index: number) => {
         // Check if business is not same as element and is actually operational.
@@ -25,6 +25,26 @@ const generateRating = (merchant: Merchant, nearbyData: any): number => {
         return ({ rating: Number(element.rating) || -1, types: element.types });
     })
     console.log(nearbyData)
+
+    // https://developers.google.com/maps/documentation/places/web-service/supported_types
+    nearbyData.forEach((element: any, index: number) => {
+        if (element.types.includes("")) {
+            rating += 2;
+        }
+        if (element.types.includes("")) {
+            rating += 2;
+        }
+        if (element.types.includes("shopping_mall") || element.types.includes("supermarket")) {
+            rating -= 0.5;
+        }
+    });
+
+    if (rating > 10) {
+        rating = 10.0
+    }
+    if (rating < 0) {
+        rating = 0.0
+    }
 
     return rating;
 }

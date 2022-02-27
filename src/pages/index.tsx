@@ -2,7 +2,7 @@ import {NextPage} from 'next';
 import Head from 'next/head';
 import styles from '@styles/Index.module.css';
 import {SyntheticEvent, useState} from "react";
-import {downloadFile, generateRatedMerchant} from "@lib/utils";
+import {downloadFile, generateRatedMerchant} from "@lib/tools";
 //@ts-ignore
 import {Merchant} from "@types/types";
 import {useRouter} from "next/router";

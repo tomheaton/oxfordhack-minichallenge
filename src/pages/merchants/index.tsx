@@ -4,7 +4,7 @@ import Card from "@components/card";
 import {Merchant} from "@types/types";
 import {SyntheticEvent, useState} from "react";
 import styles from "@styles/Index.module.css";
-import {generateRatedMerchant} from "@lib/utils";
+import {downloadFile, generateRatedMerchant} from "@lib/tools";
 import {useRouter} from "next/router";
 
 const data = require("@data/input-alt.json");
@@ -15,6 +15,8 @@ const Merchants: NextPage = () => {
 
     const [rating, setRating] = useState<boolean>(false)
     const [search, setSearch] = useState<string>("");
+
+    const [merchantList, setMerchantList] = useState<Merchant[]>(data);
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const [successMessage, setSuccessMessage] = useState<string | null>(null)
@@ -67,12 +69,17 @@ const Merchants: NextPage = () => {
                 <h1 className={"mx-2 text-5xl font-bold pt-10 flex justify-between items-center"}>
                     Merchant
                     <span>
-                        <button className="btn mx-2" onClick={handleRating}>
+                        <button className={"btn"} onClick={handleRating}>
                             rate all
                         </button>
-                        <button className={"btn mx-2"} onClick={() => {router.push("/merchants")}}>
-                        return
-                    </button>
+                        <br/>
+                        <button className={"btn"} onClick={() => {downloadFile(merchantList)}}>
+                            download
+                        </button>
+                        <br/>
+                        <button className={"btn"} onClick={() => {router.push("/")}}>
+                            return
+                        </button>
                     </span>
                 </h1>
                 <br />
@@ -83,12 +90,12 @@ const Merchants: NextPage = () => {
                        onChange={(e) => {setSearch(e.target.value)}}
                 />
                 <br />
-                {rating && (
-                    <div>
+                {isSubmitting && (
+                    <div className={"w-full text-center"}>
                         rating
                     </div>
                 )}
-                {data && data.length > 0 ? (
+                {merchantList && merchantList.length > 0 ? (
                     <div className={styles.grid}>
                         {data.filter((result: Merchant) => result.name.toLowerCase()
                             .includes(search.toLowerCase())).map((merchant: Merchant, index: number) => {

@@ -5,7 +5,7 @@ import {Merchant} from "@types/types";
 import {ProgressCircle} from 'react-simple-circle-rating';
 import styles from "@styles/Merchant.module.css";
 import {SyntheticEvent, useState} from "react";
-import {generateRatedMerchant} from "@lib/utils";
+import {generateRatedMerchant} from "@lib/tools";
 import {useRouter} from "next/router";
 
 const _data = require("@data/input-alt.json");
@@ -90,20 +90,24 @@ const MerchantId: NextPage<Props> = (props) => {
                         <p>Rating: {rating}</p>
                     </div>
 
-                    <button className={"btn"} onClick={handleRating}>
-                        get rating
-                    </button>
-                    <br />
-
-                    {showRating && (
-                        <ProgressCircle
-                            percentage={rating}
-                            color={"white"}
-                            colorBackground={"#7561e3"}
-                            textColor={"white"}
-                            size={30}
-                        />
-                    )}
+                    {
+                        showRating ? (
+                            <ProgressCircle
+                                percentage={rating}
+                                color={"white"}
+                                colorBackground={"#7561e3"}
+                                textColor={"white"}
+                                size={30}
+                            />
+                        ) : (
+                            <>
+                                <button className={"btn"} onClick={handleRating}>
+                                    get rating
+                                </button>
+                                <br />
+                            </>
+                        )
+                    }
 
                     <br/>
                     <button className={"btn"} onClick={() => {router.push("/merchants")}}>
