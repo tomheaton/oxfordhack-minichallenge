@@ -19,7 +19,7 @@ a {
 }
 
 .btn {
-    background-color: #405cf5;
+    background-color: #7561e3;
     /*background-color: #0070f3;*/
     border-radius: 6px;
     border-width: 0;
@@ -77,6 +77,6 @@ input, select {
 }
 
 input:hover, input:focus, select:hover, select:focus {
-    border-color: #0070f3;
-    outline-color: #0070f3;
+    border-color: #7561e3;
+    outline-color: #7561e3;
 }

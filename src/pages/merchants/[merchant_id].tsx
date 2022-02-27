@@ -3,30 +3,80 @@ import {GetServerSideProps, NextPage} from "next";
 import {Merchant} from "@types/types";
 // @ts-ignore
 import {ProgressCircle} from 'react-simple-circle-rating';
-import styles from "@styles/Index.module.css";
+import styles from "@styles/Merchant.module.css";
+import {SyntheticEvent, useState} from "react";
+import {generateRatedMerchant} from "@lib/utils";
+import {useRouter} from "next/router";
 
 const _data = require("@data/input-alt.json");
 
 type Props = {
-    data?: Merchant
+    merchant?: Merchant
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
-    const data = _data[Number(params?.merchant_id) || -1]
+    let merchant = null
+
+    if (Number(params?.merchant_id) >= 0) {
+        console.log(merchant)
+        merchant = _data[Number(params?.merchant_id)]
+    }
 
     return {
         props: {
-            data
+            merchant
         }
     };
 }
 
 const MerchantId: NextPage<Props> = (props) => {
 
-    if (props.data) {
+    const router = useRouter();
 
-        const {name, address, rating} = props.data;
+    let { merchant } = props;
+
+    const [showRating, setShowRating] = useState<boolean>(false);
+
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+    const [successMessage, setSuccessMessage] = useState<string | null>(null)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+    const handleRating = async (e: SyntheticEvent) => {
+        e.preventDefault();
+
+        if (isSubmitting || !merchant) {
+            return;
+        }
+
+        setIsSubmitting(true);
+        setErrorMessage(null);
+
+        try {
+            const result = await fetch(`/api/nearby?address=${encodeURIComponent(merchant.address)}`);
+            const nearbyData = await result.json()
+
+            merchant = generateRatedMerchant(merchant, nearbyData.data.results);
+
+            setShowRating(true)
+
+            if (nearbyData.success) {
+                setSuccessMessage(nearbyData.message);
+                setIsSubmitting(false);
+                return;
+            }
+
+            setErrorMessage(nearbyData.message);
+            setIsSubmitting(false);
+        } catch (e) {
+            setErrorMessage("try catch error");
+            setIsSubmitting(false);
+        }
+    }
+
+    if (props.merchant) {
+
+        const {name, address, rating} = props.merchant;
 
         return (
             <div className={styles.container}>
@@ -39,6 +89,26 @@ const MerchantId: NextPage<Props> = (props) => {
                         <p>Address: {address}</p>
                         <p>Rating: {rating}</p>
                     </div>
+
+                    <button className={"btn"} onClick={handleRating}>
+                        get rating
+                    </button>
+                    <br />
+
+                    {showRating && (
+                        <ProgressCircle
+                            percentage={rating}
+                            color={"white"}
+                            colorBackground={"#7561e3"}
+                            textColor={"white"}
+                            size={30}
+                        />
+                    )}
+
+                    <br/>
+                    <button className={"btn"} onClick={() => {router.push("/merchants")}}>
+                        return
+                    </button>
                 </div>
             </div>
         );

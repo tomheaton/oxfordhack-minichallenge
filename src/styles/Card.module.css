@@ -14,8 +14,8 @@
 }
 
 .card:hover, .card:focus, .card:active {
-    /*color: #0070f3;*/
-    border-color: #0070f3;
+    /*color: #7561e3;*/
+    border-color: #7561e3;
     border-width: 2px;
     cursor: pointer;
 }
